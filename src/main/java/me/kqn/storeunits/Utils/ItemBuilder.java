@@ -53,11 +53,11 @@ public class ItemBuilder {
             meta.setCustomModelData(cmd);
         }
         if(name!=null){
-            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',name));
+            meta.setDisplayName(Utils.pareseColor(name));
         }
         if(lore!=null){
             for (int i = 0; i < lore.size(); i++) {
-                lore.set(i,ChatColor.translateAlternateColorCodes('&',lore.get(i)));
+                lore.set(i,Utils.pareseColor(lore.get(i)));
             }
             meta.setLore(lore);
         }

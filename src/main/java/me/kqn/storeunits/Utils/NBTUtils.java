@@ -9,8 +9,8 @@ public class NBTUtils {
         NBTItem nbtItem=new NBTItem(itemStack);
         if( nbtItem.hasKey("PublicBukkitValues")){
             NBTCompound compound=nbtItem.getCompound("PublicBukkitValues");
-            if(compound.hasKey("storespace:if-uuid")){
-                compound.removeKey("storespace:if-uuid");
+            if(compound.hasKey("storeunits:if-uuid")){
+                compound.removeKey("storeunits:if-uuid");
             }
             if(compound.getKeys().size()==0){
                 nbtItem.removeKey("PublicBukkitValues");

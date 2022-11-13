@@ -1,0 +1,23 @@
+#存储数据的方式：file（文件形式存储） mysql（数据库形式）
+datasource: file
+#数据库相关配置，如果datasource用mysql则要填写
+mysql:
+  host: localhost
+  port: 3306
+  database: mysqldatabase
+  username: root
+  password: 1234
+#最大的页数
+maxPages: 3
+autosave:
+  interval_minutes: 1 #1分钟自动保存一次所有玩家数据
+#加载延迟，单位tick 用于跨服数据库互通。如果数据库读写较慢建议值设置高一点
+load_delay: 20
+#debug模式，后台会有很多输出用于调试
+debug: false
+#若检测到GemsEconomy，会优先使用。而不是使用常规的经济插件
+GemsEconomy:
+  #使用的货币信息
+  Singular: COIN
+  Plural: COINS
+  ID: "4ee2c52f-00f0-41a3-821a-3c824dc23164"

@@ -1,0 +1,12 @@
+permission: "StoreUnits.unlock" #解锁单元需要的权限
+money: "%unitID%*10"
+msg_unlock:
+  - '你解锁了新的存储单元'
+  - '单元需要为%unitID%'
+msg_noperm:
+  - '你没权限解锁%unitID%号格子'
+  - '你需要StoreUnits.%unitID%权限'
+#金币不足时消息
+msg_nomoney:
+  - '你没有足够金币'
+  - '无法解锁%unitID%号格子'

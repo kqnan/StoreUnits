@@ -29,12 +29,12 @@ public class DropConfig {
     public static void read() {
         try {
             StoreUnits.plugin.saveResource("DropConfig.yml", false);
-            file = YamlConfiguration.loadConfiguration(new File("plugins\\storeunits\\DropConfig.yml"));
+            file = YamlConfiguration.loadConfiguration(new File("plugins\\StoreUnits\\DropConfig.yml"));
             drop_prob=Integer.parseInt(file.getString("drop_prob"));
             drop_percent=Integer.parseInt(file.getString("drop_percent"));
             lore=file.getStringList("key_lore");
         } catch (Exception e) {
-            Msg.Log("[storeunits]读取DropConfig.yml时出错，启用内置默认值");
+            Msg.Log("[StoreUnits]读取DropConfig.yml时出错，启用内置默认值");
             e.printStackTrace();
             drop_prob=50;
             drop_percent=50;

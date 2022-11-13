@@ -11,14 +11,14 @@ import java.lang.reflect.Type;
 public class ItemStackSerializer implements JsonDeserializer<ItemStack>, JsonSerializer<ItemStack> {
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        NBTContainer nbtContainer=new NBTContainer(((JsonObject)json).get("StoreSpace_item").getAsString());
+        NBTContainer nbtContainer=new NBTContainer(((JsonObject)json).get("StoreUnits_item").getAsString());
         return NBTItem.convertNBTtoItem(nbtContainer);
     }
 
     @Override
     public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jsonElement=new JsonObject();
-        jsonElement.addProperty("StoreSpace_item",NBTItem.convertItemtoNBT(src).toString());
+        jsonElement.addProperty("StoreUnits_item",NBTItem.convertItemtoNBT(src).toString());
         return jsonElement;
     }
 }

@@ -83,7 +83,7 @@ public class Config {
     public static void read() {
         try {
             StoreUnits.plugin.saveResource("Config.yml", false);
-            file = YamlConfiguration.loadConfiguration(new File("plugins\\StoreSpace\\Config.yml"));
+            file = YamlConfiguration.loadConfiguration(new File("plugins\\StoreUnits\\Config.yml"));
             datasource = file.getString("datasource");
             maxPages=Integer.parseInt(file.getString("maxPages"));
             mysql_host=file.getString("mysql.host");
@@ -98,7 +98,7 @@ public class Config {
             load_delay=Integer.parseInt(file.getString("load_delay"));
             debug=Boolean.parseBoolean(file.getString("debug"));
         } catch (Exception e) {
-            Msg.Log("[StoreSpace]读取Config.yml时出错，启用内置默认值");
+            Msg.Log("[StoreUnits]读取Config.yml时出错，启用内置默认值");
             e.printStackTrace();
             maxPages=3;
             load_delay=20;

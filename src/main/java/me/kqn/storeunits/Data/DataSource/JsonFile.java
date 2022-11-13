@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class JsonFile implements DataSource {
-    String folder="plugins\\storeunits\\data";
+    String folder="plugins\\StoreUnits\\data";
 
     /**
      * 若读取到错误数据则返回空的playerdata

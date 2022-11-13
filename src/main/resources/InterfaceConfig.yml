@@ -1,0 +1,56 @@
+Default-MainUI-Title: "存储单元总界面标题"
+Default-MainUI-Unit-Icon:
+  name: '默认存储单元图标'
+  lore:
+    - ""
+  custommodeldata: 1234
+  material: CHEST
+Default-MainUI-Unlock-Icon:
+  #当没有任何权限时显示的图标 没有permission字段
+  icon1:
+    name: '默认没有权限时未解锁单元图标'
+    lore:
+      - ""
+      - ""
+    custommodeldata: 1234
+    material: barrier
+  #当有StoreUnits.perm1权限时的图标  有permission字段
+  icon2:
+    permission: "StoreUnits.perm1"
+    name: '当有StoreUnits.perm1权限时未解锁单元图标'
+    lore:
+      - ""
+      - ""
+    custommodeldata: 1234
+    material: barrier
+Default-MainUI-NextPage:
+  name: '默认下一页图标'
+  lore:
+    - ''
+  custommodeldata: 1234
+  material: paper
+Default-MainUI-PrePage:
+  name: '默认上一页图标'
+  lore:
+    - ''
+  custommodeldata: 1234
+  material: paper
+Default-Unlock-Slot:
+  name: '存储空间内未解锁的槽位图标'
+  lore:
+    - ''
+  custommodeldata: 1234
+  material: Barrier
+#下界之星，升级按钮
+Default-Setting-Upgrade:
+  name: '升级需要花费%money%'
+  lore:
+    - '还需要权限%permission%'
+  custommodeldata: 1234
+  material: NETHER_STAR
+Default-Title: "存储空间的标题"
+#默认单元名字的格式  %unitID%箱子序号  %unitLevel%箱子等级 %unitName%玩家自定义内容
+Default-Name-Format: "%unitID% %unitLevel% %unitName%"
+#%unitName%的默认值
+Default-Name: "普通箱子"
+Default-Setting-Title: '设置面板菜单的标题'

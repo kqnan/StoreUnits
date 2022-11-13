@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Mysql implements DataSource {
-    private static String SAVE = "INSERT INTO storeunits(UUID,Data) VALUE(?,?) ON DUPLICATE KEY UPDATE Data=?";
+    private static String SAVE = "INSERT INTO StoreUnits(UUID,Data) VALUE(?,?) ON DUPLICATE KEY UPDATE Data=?";
     private String username;
     private String userpw;
     private String url;
@@ -38,8 +38,8 @@ public class Mysql implements DataSource {
             Statement statement = null;
             try {
                 statement = connection.createStatement();
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS storeunits(UUID varchar(100) primary key,Data blob);");
-                statement.executeUpdate("ALTER TABLE storeunits MODIFY Data blob;");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS StoreUnits(UUID varchar(100) primary key,Data blob);");
+                statement.executeUpdate("ALTER TABLE StoreUnits MODIFY Data blob;");
                 statement.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -48,7 +48,7 @@ public class Mysql implements DataSource {
         }
     @Override
     public PlayerData readToPlayerData(UUID uuid) {
-        String SELECT = "SELECT * FROM storeunits WHERE UUID=?";
+        String SELECT = "SELECT * FROM StoreUnits WHERE UUID=?";
         byte[] bytes=new byte[0];
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT);

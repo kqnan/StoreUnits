@@ -14,6 +14,8 @@ import me.kqn.storeunits.Integretion.Economy.GemsEco;
 import me.kqn.storeunits.Integretion.Economy.Vault;
 import me.kqn.storeunits.Integretion.Permission.DefaultPerm;
 import me.kqn.storeunits.Integretion.Permission.Permission;
+import me.kqn.storeunits.Listeners.ChatListener;
+import me.kqn.storeunits.Listeners.DropListener;
 import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -39,9 +41,10 @@ public static StoreUnits plugin;
     @Override
     public void onEnable() {
         plugin=this;
-        Bukkit.getPluginCommand("storeunits").setExecutor(new MainCommand());
+        Bukkit.getPluginCommand("StoreUnits").setExecutor(new MainCommand());
         Bukkit.getPluginManager().registerEvents(new Listeners(),this);
         Bukkit.getPluginManager().registerEvents(new DropListener(),this);
+        Bukkit.getPluginManager().registerEvents(new ChatListener(),this);
         loadConfig();
         initIntegretion();
         //设定数据源
@@ -70,11 +73,12 @@ public static StoreUnits plugin;
     }
 
     public void loadConfig(){
-        PageIcon.read();
-        PageConfig.read();
+        InterfaceConfig.read();
+        UpgradeConfig.read();
         MessageConfig.read();
         Config.read();
         DropConfig.read();
+        UnitsConfig.read();
         if(Config.getDatasource().equalsIgnoreCase("file")){
             dataSource=new JsonFile();
         }
