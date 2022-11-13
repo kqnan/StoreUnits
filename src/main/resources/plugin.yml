@@ -1,0 +1,4 @@
+name: StoreUnits
+version: '${project.version}'
+main: me.kqn.storeunits.StoreUnits
+api-version: 1.16
