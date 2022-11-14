@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.kqn.storeunits.Config.Config;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -60,6 +59,7 @@ public class PlayerData   {
         }
         tmp[playerData.storePages.length]=new StorePage(pID,0);
         playerData.storePages=tmp;
+        //Msg.msg(pID, Utils.pareseColor(MessageConfig.unlock));
     }
     public static JsonElement toJson(PlayerData playerData){
         if(playerData.storePages==null){//如果传入一个损坏的或是无效的数据则新建。

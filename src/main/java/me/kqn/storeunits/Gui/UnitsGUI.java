@@ -5,9 +5,9 @@ import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import me.kqn.storeunits.Config.Config;
 import me.kqn.storeunits.Config.InterfaceConfig;
-import me.kqn.storeunits.Config.MessageConfig;
 import me.kqn.storeunits.Config.UnitsConfig;
 import me.kqn.storeunits.Data.PlayerData;
+import me.kqn.storeunits.Data.StorePage;
 import me.kqn.storeunits.StoreUnits;
 import me.kqn.storeunits.Utils.*;
 import org.bukkit.Bukkit;
@@ -72,7 +72,7 @@ public class UnitsGUI {
         //读取pData到gui界面，没有对pData进行任何写操作
         //创建窗口主体,
         StaticPane page=new StaticPane(9,5);
-        int unlock_start=0;
+        int unlock_start=-1;
         for(int j=45*pageID;j<Math.min(pData.storePages.length,45*pageID+45);j++){
             int inv_index=j-45*pageID;
             unlock_start=Math.max(inv_index,unlock_start);
@@ -90,15 +90,13 @@ public class UnitsGUI {
         //创建下边滑块
         StaticPane spane=new StaticPane(0,5,9,1);
         //上一页按钮
-        spane.addItem(new GuiItem(preIcon(pageID), x->{if(page_current-1>=0){
+        spane.addItem(new GuiItem(preIcon(pageID), x->{if(pageID-1>=0){
             player.closeInventory();
-            page_current--;
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(pageID-1);},1);
         }x.setCancelled(true);}),0,0);
         //下一页按钮
-        spane.addItem(new GuiItem(nextIcon(pageID), x->{if(page_current+1<pData.storePages.length){
+        spane.addItem(new GuiItem(nextIcon(pageID), x->{if(pData.storePages.length>=(pageID+1)*45){
             player.closeInventory();
-            page_current++;
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(pageID+1);},1);
         }x.setCancelled(true);}),8,0);
 
@@ -139,6 +137,7 @@ public class UnitsGUI {
                             return;//达到解锁上限
                         }
                         PlayerData.addPage(((OfflinePlayer)player).getUniqueId());
+                        StoreUnits.plugin.economy.take(((OfflinePlayer) player),UnitsConfig.getMoney(unitID));
                         gui.getInventory().setItem(slot,null);
                         player.closeInventory();
                         Msg.msg(((OfflinePlayer)player).getUniqueId(),UnitsConfig.getMsg_unlock(unitID));

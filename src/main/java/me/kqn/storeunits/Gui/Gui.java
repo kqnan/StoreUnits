@@ -3,8 +3,6 @@ package me.kqn.storeunits.Gui;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
-import me.kqn.storeunits.Config.MessageConfig;
-import me.kqn.storeunits.Config.UpgradeConfig;
 import me.kqn.storeunits.Config.InterfaceConfig;
 import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.Data.StorePage;
@@ -12,7 +10,6 @@ import me.kqn.storeunits.StoreUnits;
 import me.kqn.storeunits.Utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -38,7 +35,6 @@ public class Gui {
 
         //阻止下方滑条栏放置物品
         gui.setOnGlobalClick(x->{
-
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
                 Inventory inv=gui.getInventory();
 
@@ -89,15 +85,13 @@ public class Gui {
             //创建下边滑块
             StaticPane spane=new StaticPane(0,5,9,1);
             //上一页按钮
-            spane.addItem(new GuiItem(preIcon(unitID), x->{if(page_current-1>=0){
+            spane.addItem(new GuiItem(preIcon(unitID), x->{if(unitID-1>=0){
                 player.closeInventory();
-                page_current--;
                 Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(unitID-1);},1);
             }x.setCancelled(true);}),0,0);
             //下一页按钮
-            spane.addItem(new GuiItem(nextIcon(unitID), x->{if(page_current+1<pData.storePages.length){
+            spane.addItem(new GuiItem(nextIcon(unitID), x->{if(unitID+1<pData.storePages.length){
                 player.closeInventory();
-                page_current++;
                 Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(unitID+1);},1);
             }x.setCancelled(true);}),8,0);
 
@@ -137,13 +131,13 @@ public class Gui {
 
     }
     private ItemStack preIcon(int pageID){
-        InterfaceConfig.Icon icon= InterfaceConfig.getMainui_prepage();
+        InterfaceConfig.Icon icon= InterfaceConfig.getPrepage_unit();
         return new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
 
     }
     private ItemStack nextIcon(int pageID){
-        InterfaceConfig.Icon icon= InterfaceConfig.getMainui_nextpage();
+        InterfaceConfig.Icon icon= InterfaceConfig.getNextpage_unit();
         return new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
 

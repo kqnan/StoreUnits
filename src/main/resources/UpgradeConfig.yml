@@ -11,5 +11,6 @@ msg_nomoney:
 default-unlock: 7
 #每升一级解锁的槽位的个数
 upgrade-unlock: 3
-
+#升级时的消息，仅支持单行
+upgrade: "升级成功"
 

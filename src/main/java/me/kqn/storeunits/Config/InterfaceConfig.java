@@ -24,8 +24,21 @@ public class InterfaceConfig {
     private static String title;
     private static String setting_title;
     private static String name_format;
+
+
+
     private static String default_name;
     private static Icon setting_upgrade;
+    private static Icon nextpage_unit;
+    private static Icon prepage_unit;
+
+    public static Icon getNextpage_unit() {
+        return nextpage_unit;
+    }
+
+    public static Icon getPrepage_unit() {
+        return prepage_unit;
+    }
 
     public static Icon getSetting_upgrade(double money) {
         ArrayList<String> msg=new ArrayList<>();
@@ -72,6 +85,9 @@ public class InterfaceConfig {
         default_name=file.getString("Default-Name");
         unlock_slot=readIcon(file.getConfigurationSection("Default-Unlock-Slot"));
         setting_upgrade=readIcon(file.getConfigurationSection("Default-Setting-Upgrade"))    ;
+        nextpage_unit=readIcon(file.getConfigurationSection("Default-Unit-NextPage"));
+        prepage_unit=readIcon(file.getConfigurationSection("Default-Unit-PrePage"));
+
     }
 
     private static Icon readIcon(ConfigurationSection section){

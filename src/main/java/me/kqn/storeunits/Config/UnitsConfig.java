@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UnitsConfig {
     private static String permission;
-
+    private static List<String> msg_dialog;
     public static String getPermission() {
         return permission;
     }
@@ -36,6 +36,11 @@ public class UnitsConfig {
     public static List<String> getMsg_MaxPage(){
         return Collections.singletonList("已达到解锁上限");
     }
+
+    public static List<String> getMsg_dialog() {
+        return msg_dialog;
+    }
+
     public static List<String> getMsg_unlock(int unitID) {
         ArrayList<String> msg=new ArrayList<>();
         for (String s : msg_unlock) {
@@ -63,6 +68,7 @@ public class UnitsConfig {
         msg_noperm=file.getStringList("msg_noperm");
         msg_nomoney=file.getStringList("msg_nomoney");
         msg_unlock=file.getStringList("msg_unlock");
+        msg_dialog=file.getStringList("dialog");
     }
 
 }

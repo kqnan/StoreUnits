@@ -5,7 +5,7 @@ import me.kqn.storeunits.Config.*;
 import me.kqn.storeunits.Data.DataSource.DataSource;
 import me.kqn.storeunits.Data.DataSource.JsonFile;
 import me.kqn.storeunits.Data.DataSource.Mysql;
-import me.kqn.storeunits.Data.Listeners;
+import me.kqn.storeunits.Listeners.LoginListeners;
 import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.Integretion.Drop.DropDefault;
 import me.kqn.storeunits.Integretion.Drop.DropIntegretion;
@@ -15,7 +15,6 @@ import me.kqn.storeunits.Integretion.Economy.Vault;
 import me.kqn.storeunits.Integretion.Permission.DefaultPerm;
 import me.kqn.storeunits.Integretion.Permission.Permission;
 import me.kqn.storeunits.Listeners.ChatListener;
-import me.kqn.storeunits.Listeners.DropListener;
 import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -42,8 +41,7 @@ public static StoreUnits plugin;
     public void onEnable() {
         plugin=this;
         Bukkit.getPluginCommand("StoreUnits").setExecutor(new MainCommand());
-        Bukkit.getPluginManager().registerEvents(new Listeners(),this);
-        Bukkit.getPluginManager().registerEvents(new DropListener(),this);
+        Bukkit.getPluginManager().registerEvents(new LoginListeners(),this);
         Bukkit.getPluginManager().registerEvents(new ChatListener(),this);
         loadConfig();
         initIntegretion();
@@ -75,9 +73,8 @@ public static StoreUnits plugin;
     public void loadConfig(){
         InterfaceConfig.read();
         UpgradeConfig.read();
-        MessageConfig.read();
+
         Config.read();
-        DropConfig.read();
         UnitsConfig.read();
         if(Config.getDatasource().equalsIgnoreCase("file")){
             dataSource=new JsonFile();

@@ -24,15 +24,27 @@ Default-MainUI-Unlock-Icon:
     custommodeldata: 1234
     material: barrier
 Default-MainUI-NextPage:
-  name: '默认下一页图标'
+  name: '主页面默认下一页图标'
   lore:
     - ''
   custommodeldata: 1234
   material: paper
 Default-MainUI-PrePage:
-  name: '默认上一页图标'
+  name: '主页面默认上一页图标'
   lore:
     - ''
+  custommodeldata: 1234
+  material: paper
+Default-Unit-NextPage:
+  name: '存储单元内部页面的下一页图标'
+  lore:
+    - '点击查看下一个存储单元'
+  custommodeldata: 1234
+  material: paper
+Default-Unit-PrePage:
+  name: '存储单元内部页面的上一页图标'
+  lore:
+    - '点击查看上一个存储单元'
   custommodeldata: 1234
   material: paper
 Default-Unlock-Slot:
@@ -50,7 +62,7 @@ Default-Setting-Upgrade:
   material: NETHER_STAR
 Default-Title: "存储空间的标题"
 #默认单元名字的格式  %unitID%箱子序号  %unitLevel%箱子等级 %unitName%玩家自定义内容
-Default-Name-Format: "%unitID% %unitLevel% %unitName%"
+Default-Name-Format: "&f%unitID%号%unitLevel%级%unitName%"
 #%unitName%的默认值
 Default-Name: "普通箱子"
 Default-Setting-Title: '设置面板菜单的标题'

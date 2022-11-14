@@ -1,16 +1,13 @@
 package me.kqn.storeunits.Data;
 
 import me.kqn.storeunits.Config.InterfaceConfig;
-import me.kqn.storeunits.Config.MessageConfig;
 import me.kqn.storeunits.Config.UpgradeConfig;
 import me.kqn.storeunits.StoreUnits;
 import me.kqn.storeunits.Utils.ExpParser;
 import me.kqn.storeunits.Utils.ItemBuilder;
 import me.kqn.storeunits.Utils.Msg;
-import me.kqn.storeunits.Utils.SoundUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -55,7 +52,7 @@ public class StorePage extends JsonStorePage{
 * */
     public boolean unlock(int amt,int unitID){
         OfflinePlayer player=Bukkit.getOfflinePlayer(pID);
-
+        if(amount_unlock>=45)return false;
         //检查经济是否足够
         double moneyNeed= ExpParser.parseMathExpression(UpgradeConfig.getMoney_upgrade(unitID,level));//获取需要多少金币解锁
         if(!StoreUnits.plugin.economy.has(Bukkit.getOfflinePlayer(pID),moneyNeed)){//如果没有足够的金币
@@ -65,6 +62,8 @@ public class StorePage extends JsonStorePage{
         //解锁
         expandPage(amt);//创建一个新空间，把旧空间复制到新空间，再丢弃旧空间
         StoreUnits.plugin.economy.take(player,moneyNeed);
+        this.level++;
+        Msg.msg(pID,UpgradeConfig.getMsg_upgrade());//发送升级消息
         return  true;
     }
     //创建一个新空间，把旧空间复制到新空间，再丢弃旧空间

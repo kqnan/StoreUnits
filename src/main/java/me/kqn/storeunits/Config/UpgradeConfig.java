@@ -28,9 +28,15 @@ public class UpgradeConfig {
         return upgrade_unlock;
     }
 
+    private static String msg_upgrade;
     private static YamlConfiguration file;
     private static int default_unlock;
     private static  int upgrade_unlock;
+
+    public static String getMsg_upgrade() {
+        return msg_upgrade;
+    }
+
     public static void read(){
         try {
             StoreUnits.plugin.saveResource("UpgradeConfig.yml",false);
@@ -39,6 +45,7 @@ public class UpgradeConfig {
             msg_nomoney=file.getStringList("msg_nomoney");
             default_unlock=Integer.parseInt(file.getString("default-unlock"));
             upgrade_unlock=Integer.parseInt(file.getString("upgrade-unlock"));
+            msg_upgrade=file.getString("upgrade");
         }catch (Exception e){
             e.printStackTrace();
         }

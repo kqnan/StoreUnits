@@ -1,6 +1,7 @@
-package me.kqn.storeunits.Data;
+package me.kqn.storeunits.Listeners;
 
 import me.kqn.storeunits.Config.Config;
+import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.StoreUnits;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
-public class Listeners implements Listener {
+public class LoginListeners implements Listener {
     @EventHandler
     public void loadOnLogin(PlayerLoginEvent event){
         UUID uuid=((OfflinePlayer)event.getPlayer()).getUniqueId();
