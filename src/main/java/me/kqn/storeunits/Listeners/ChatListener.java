@@ -38,14 +38,20 @@ public class ChatListener implements Listener {
             dialogPlayer.remove(uuid);//取消对话
             if(tasks.get(uuid)!=null)tasks.get(uuid).cancel();//取消任务
             tasks.remove(uuid);
+            event.setCancelled(true);
             if(msg.equals("cancel")||msg.equals("取消")){//直接返回设定界面
-                SettingGUI settingGUI=new SettingGUI(event.getPlayer());
-                settingGUI.show(info.unitID,info.page,info.pageID);
+                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
+                    SettingGUI settingGUI=new SettingGUI(event.getPlayer());
+                    settingGUI.show(info.unitID,info.page,info.pageID);
+                },1);
             }
             else{
                 info.page.name=msg;
-                SettingGUI settingGUI=new SettingGUI(event.getPlayer());
-                settingGUI.show(info.unitID,info.page,info.pageID);
+                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
+                    SettingGUI settingGUI=new SettingGUI(event.getPlayer());
+                    settingGUI.show(info.unitID,info.page,info.pageID);
+                },1);
+
             }
         }
     }

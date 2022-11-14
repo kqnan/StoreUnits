@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class StorePage extends JsonStorePage{
-    // TODO: 2022/11/10 多线程问题，容易引发错误 
+
 
     public StorePage(){
         super();
@@ -32,7 +32,7 @@ public class StorePage extends JsonStorePage{
         InterfaceConfig.Icon icon=InterfaceConfig.getMainui_unit_icon();
         this.unitIcon=new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
-
+      //  Msg.debug(icon);
         name=InterfaceConfig.getDefault_name();
 
     }
@@ -46,6 +46,7 @@ public class StorePage extends JsonStorePage{
         InterfaceConfig.Icon icon=InterfaceConfig.getMainui_unit_icon();
         this.unitIcon=new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
+
         name=InterfaceConfig.getDefault_name();
     }
 

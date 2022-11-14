@@ -30,10 +30,10 @@ public class Gui {
         this.pData=PlayerData.getPlayerData(player);
     }
 
-    public void showPage(int pageID){
+    public void showPage(int unitID){
         if(!pData.isPrepared)return;
-        if(pData.storePages.length<=pageID||pageID<0)return;
-        ChestGui gui=new ChestGui(6, InterfaceConfig.getTitle());
+        if(pData.storePages.length<=unitID||unitID<0)return;
+        ChestGui gui=new ChestGui(6,InterfaceConfig.getFullName(pData.storePages[unitID].name,unitID,pData.storePages[unitID].level));
         int backbutton=4;
 
         //阻止下方滑条栏放置物品
@@ -71,7 +71,7 @@ public class Gui {
         gui.setOnGlobalDrag(x->x.setCancelled(true));
         //读取pData到gui界面，没有对pData进行任何写操作
         //创建窗口主体
-        StorePage storePage=pData.storePages[pageID];
+        StorePage storePage=pData.storePages[unitID];
             StaticPane page=new StaticPane(9,5);
             for(int j=0;j<storePage.contents.length;j++){
                 if(storePage.contents[j]!=null&&storePage.contents[j].getType()!= Material.AIR){
@@ -84,28 +84,33 @@ public class Gui {
                 }
             }
             //创建未解锁槽位的图标
-            GenerateUnlockIcon(storePage,page, pageID,gui);
+            GenerateUnlockIcon(storePage,page, unitID,gui);
             gui.addPane(page);
             //创建下边滑块
             StaticPane spane=new StaticPane(0,5,9,1);
             //上一页按钮
-            spane.addItem(new GuiItem(preIcon(pageID), x->{if(page_current-1>=0){
-                //player.closeInventory();
+            spane.addItem(new GuiItem(preIcon(unitID), x->{if(page_current-1>=0){
+                player.closeInventory();
                 page_current--;
-                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(pageID-1);},1);
+                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(unitID-1);},1);
             }x.setCancelled(true);}),0,0);
             //下一页按钮
-            spane.addItem(new GuiItem(nextIcon(pageID), x->{if(page_current+1<pData.storePages.length){
-                //player.closeInventory();
+            spane.addItem(new GuiItem(nextIcon(unitID), x->{if(page_current+1<pData.storePages.length){
+                player.closeInventory();
                 page_current++;
-                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(pageID+1);},1);
+                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{showPage(unitID+1);},1);
             }x.setCancelled(true);}),8,0);
 
             //返回总界面按钮
-
-            spane.addItem(new GuiItem(slideIcon(pageID),x->{x.setCancelled(true);}),backbutton,0);
+            spane.addItem(new GuiItem(slideIcon(unitID),x->{x.setCancelled(true);
+                player.closeInventory();
+                Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
+                    UnitsGUI gui1=new UnitsGUI(player);
+                    gui1.show(0);
+                },1);
+            }),backbutton,0);
             gui.addPane(spane);
-            gui.setOnClose(x->CallonClose(gui,x,pageID));
+            gui.setOnClose(x->CallonClose(gui,x,unitID));
             gui.show(player);
     }
     private void GenerateUnlockIcon(StorePage storePage,StaticPane page,int pageID,ChestGui gui){
@@ -120,7 +125,7 @@ public class Gui {
                     if(!(x.getClick()==ClickType.LEFT||x.getClick()==ClickType.RIGHT))return;
                     int slot=finalY_lock*9+finalX_lock;
 
-                }),x_lock,y_lock);
+                 }),x_lock,y_lock);
 
             }
             x_lock=0;

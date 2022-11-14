@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemBuilder {
@@ -56,10 +57,12 @@ public class ItemBuilder {
             meta.setDisplayName(Utils.pareseColor(name));
         }
         if(lore!=null){
+            ArrayList<String> tmp=new ArrayList<>();
             for (int i = 0; i < lore.size(); i++) {
-                lore.set(i,Utils.pareseColor(lore.get(i)));
+                tmp.add(Utils.pareseColor(lore.get(i)));
+
             }
-            meta.setLore(lore);
+            meta.setLore(tmp);
         }
         itemStack.setItemMeta(meta);
         if(NBT!=null){

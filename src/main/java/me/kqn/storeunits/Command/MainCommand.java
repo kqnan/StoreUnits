@@ -3,6 +3,7 @@ package me.kqn.storeunits.Command;
 
 import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.Gui.Gui;
+import me.kqn.storeunits.Gui.UnitsGUI;
 import me.kqn.storeunits.StoreUnits;
 import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class MainCommand implements CommandExecutor , TabCompleter {
     String prefix="[storeunits]";
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if(args.length==1){
             if(sender instanceof Player && sender.isOp()){
                 if(args[0].equals("save")){
@@ -36,15 +38,18 @@ public class MainCommand implements CommandExecutor , TabCompleter {
             }
         }
         if(args.length>1&&args[0].equalsIgnoreCase("open")){
+
             if((sender instanceof Player && sender.isOp())||(sender instanceof ConsoleCommandSender)){
+
                 Player player=Bukkit.getPlayerExact(args[1]);
                 if(player==null){
                     Msg.msg(sender,prefix+"该玩家不存在");
                 }
                 else {
 
-                    Gui gui=new Gui(player);
-                    gui.showPage(0);
+                    UnitsGUI gui=new UnitsGUI(player);
+                    gui.show(0);
+
                 }
             }
             return true;

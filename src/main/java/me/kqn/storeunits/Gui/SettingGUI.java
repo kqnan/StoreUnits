@@ -42,7 +42,13 @@ public class SettingGUI {
         //显示图标
         GuiItem guiItem=new GuiItem(page.getUnitIcon(unitID));
         guiItem.setAction(x->{
-            x.setCancelled(true);});
+            x.setCancelled(true);
+            player.closeInventory();
+            Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
+                Gui gui1=new Gui(player);
+                gui1.showPage(unitID);
+            },1);
+        });
         pane.addItem(guiItem,2,1);
         //命名牌
         pane.addItem(new GuiItem(new ItemBuilder(Material.NAME_TAG).setName(InterfaceConfig.getFullName(page.name,unitID,page.level)).setLore(Collections.singletonList("&8点击更改")).build(), x->{
@@ -69,5 +75,7 @@ public class SettingGUI {
             x.setCancelled(true);
 
         }),6,1);
+        gui.addPane(pane);
+        gui.show(player);
     }
 }

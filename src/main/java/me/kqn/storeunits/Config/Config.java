@@ -63,7 +63,7 @@ public class Config {
     private static Boolean debug;
 
     public static Boolean getDebug() {
-        return debug;
+        return true;
     }
 
     private static String gems_plural;
@@ -96,7 +96,7 @@ public class Config {
             gems_id=file.getString("GemsEconomy.ID");
             autosave_interval=Double.parseDouble(file.getString("autosave.interval_minutes"));
             load_delay=Integer.parseInt(file.getString("load_delay"));
-            debug=Boolean.parseBoolean(file.getString("debug"));
+            debug=true;
         } catch (Exception e) {
             Msg.Log("[StoreUnits]读取Config.yml时出错，启用内置默认值");
             e.printStackTrace();

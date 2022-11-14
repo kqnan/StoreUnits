@@ -81,6 +81,11 @@ public class PlayerData   {
                 contents.add(NBTItem.convertItemtoNBT(content).toString());
             }
             jsonPage.add("contents",contents);
+            jsonPage.addProperty("unitIcon",NBTItem.convertItemtoNBT(storePage.unitIcon).toString());
+            jsonPage.addProperty("unitID",storePage.unitID);
+            jsonPage.addProperty("name",storePage.name);
+            jsonPage.addProperty("level",storePage.level);
+
             jsonArray.add(jsonPage);
         }
         return jsonArray;
@@ -107,6 +112,10 @@ public class PlayerData   {
             for (JsonElement content : contents) {
                 page.contents[i++]=NBTItem.convertNBTtoItem(new NBTContainer(content.getAsString()));
             }
+            page.unitIcon=NBTItem.convertNBTtoItem(new NBTContainer(objPage.get("unitIcon").getAsString()));
+            page.unitID = objPage.get("unitID").getAsInt();
+            page.name=objPage.get("name").getAsString();
+            page.level=objPage.get("level").getAsInt();
             playerData.storePages[j++]=page;
             playerData.uuid=page.pID;
         }

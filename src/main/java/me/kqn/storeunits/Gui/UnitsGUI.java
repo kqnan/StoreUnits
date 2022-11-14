@@ -77,10 +77,11 @@ public class UnitsGUI {
             ItemStack uIcon=pData.storePages[j].getUnitIcon(j);
             int finalJ = j;
             page.addItem(new GuiItem(uIcon, x->{x.setCancelled(true);
+                player.closeInventory();
                 SettingGUI settingGUI=new SettingGUI(player);
                 settingGUI.show(finalJ,pData.storePages[finalJ],pageID);}),inv_index%9,inv_index/9);
         }
-
+        unlock_start++;
         //创建未解锁槽位的图标
         GenerateUnlockIcon(unlock_start,page, pageID,gui);
         gui.addPane(page);
@@ -88,13 +89,13 @@ public class UnitsGUI {
         StaticPane spane=new StaticPane(0,5,9,1);
         //上一页按钮
         spane.addItem(new GuiItem(preIcon(pageID), x->{if(page_current-1>=0){
-            //player.closeInventory();
+            player.closeInventory();
             page_current--;
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(pageID-1);},1);
         }x.setCancelled(true);}),0,0);
         //下一页按钮
         spane.addItem(new GuiItem(nextIcon(pageID), x->{if(page_current+1<pData.storePages.length){
-            //player.closeInventory();
+            player.closeInventory();
             page_current++;
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(pageID+1);},1);
         }x.setCancelled(true);}),8,0);

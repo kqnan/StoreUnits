@@ -3,6 +3,8 @@ package me.kqn.storeunits.Config;
 
 import me.kqn.storeunits.Data.StorePage;
 import me.kqn.storeunits.StoreUnits;
+import me.kqn.storeunits.Utils.Msg;
+import me.kqn.storeunits.Utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -35,6 +37,7 @@ public class InterfaceConfig {
         }
         Icon icon=setting_upgrade.Clone();
         icon.lore=msg;
+        icon.name= icon.name.replace("%money%",String.valueOf(money)).replace("%permission%",permission);
         return icon;
     }
 
@@ -54,6 +57,7 @@ public class InterfaceConfig {
         StoreUnits.plugin.saveResource("InterfaceConfig.yml",false);
         file= YamlConfiguration.loadConfiguration(new File("plugins\\StoreUnits\\InterfaceConfig.yml"));
         mainui_title=file.getString("Default-MainUI-Title");
+       // Msg.debug(file.getConfigurationSection("Default-MainUI-Unit-Icon"));
         mainui_unit_icon=readIcon(file.getConfigurationSection("Default-MainUI-Unit-Icon"));
         mainui_unlock_icon=new HashMap<>();
         ConfigurationSection unlockicons=file.getConfigurationSection("Default-MainUI-Unlock-Icon");
@@ -86,6 +90,7 @@ public class InterfaceConfig {
     }
 
     public static Icon getMainui_unit_icon() {
+
         return mainui_unit_icon;
     }
 
@@ -98,7 +103,7 @@ public class InterfaceConfig {
         return unlock_icon_noperms;
     }
     public static String getFullName(String name,int unitID,int level){
-     return    name_format.replace("%unitID%",String.valueOf(unitID)).replace("%unitLevel%",String.valueOf(level)).replace("%unitName%",name);
+     return Utils.pareseColor(name_format.replace("%unitID%",String.valueOf(unitID)).replace("%unitLevel%",String.valueOf(level)).replace("%unitName%",name));
 
 
     }
