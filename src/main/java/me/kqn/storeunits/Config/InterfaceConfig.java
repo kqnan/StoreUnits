@@ -1,11 +1,8 @@
 package me.kqn.storeunits.Config;
 
 
-import me.kqn.storeunits.Data.StorePage;
 import me.kqn.storeunits.StoreUnits;
-import me.kqn.storeunits.Utils.Msg;
 import me.kqn.storeunits.Utils.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -30,14 +27,14 @@ public class InterfaceConfig {
     private static String default_name;
     private static Icon setting_upgrade;
 
-    public static Icon getSetting_upgrade(double money,String permission) {
+    public static Icon getSetting_upgrade(double money) {
         ArrayList<String> msg=new ArrayList<>();
         for (String s : setting_upgrade.lore) {
-            msg.add(s.replace("%money%",String.valueOf(money)).replace("%permission%",permission));
+            msg.add(s.replace("%money%",String.valueOf(money)));
         }
-        Icon icon=setting_upgrade.Clone();
+        Icon icon=setting_upgrade.clone();
         icon.lore=msg;
-        icon.name= icon.name.replace("%money%",String.valueOf(money)).replace("%permission%",permission);
+        icon.name= icon.name.replace("%money%",String.valueOf(money));
         return icon;
     }
 
@@ -94,13 +91,21 @@ public class InterfaceConfig {
         return mainui_unit_icon;
     }
 
-    public static Icon getMainui_unlock_icon(OfflinePlayer offlinePlayer) {
+    public static Icon getMainui_unlock_icon(OfflinePlayer offlinePlayer,double money_need,String perm_need) {
+        Icon icon=unlock_icon_noperms.clone();
         for (String perm : mainui_unlock_icon.keySet()) {
             if(StoreUnits.plugin.permission.hasPerm(offlinePlayer.getUniqueId(),perm)){
-                return mainui_unlock_icon.get(perm);
+                icon=mainui_unlock_icon.get(perm).clone();
+                break;
             }
         }
-        return unlock_icon_noperms;
+        icon.name=icon.name.replace("%money%",String.valueOf(money_need)).replace("%permission%",perm_need);
+        ArrayList<String> lore=new ArrayList<>();
+        for (String s : icon.lore) {
+            lore.add(s.replace("%money%",String.valueOf(money_need)).replace("%permission%",perm_need));
+        }
+        icon.lore=lore;
+        return icon;
     }
     public static String getFullName(String name,int unitID,int level){
      return Utils.pareseColor(name_format.replace("%unitID%",String.valueOf(unitID)).replace("%unitLevel%",String.valueOf(level)).replace("%unitName%",name));
@@ -132,10 +137,10 @@ public class InterfaceConfig {
         public List<String> lore;
         public    int custommodeldata;
         public   Material material;
-        public Icon Clone(){
+        public Icon clone(){
             Icon icon=new Icon();
             icon.name=this.name;
-            icon.lore=new ArrayList<>(this.lore);
+            icon.lore=new ArrayList<>();
             icon.lore.addAll(this.lore);
             icon.custommodeldata=this.custommodeldata;
             icon.material=this.material;

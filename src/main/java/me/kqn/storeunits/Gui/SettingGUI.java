@@ -4,12 +4,14 @@ import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import me.kqn.storeunits.Config.UnitsConfig;
+import me.kqn.storeunits.Config.UpgradeConfig;
 import me.kqn.storeunits.Listeners.ChatListener;
 import me.kqn.storeunits.Config.InterfaceConfig;
 import me.kqn.storeunits.Config.MessageConfig;
 import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.Data.StorePage;
 import me.kqn.storeunits.StoreUnits;
+import me.kqn.storeunits.Utils.ExpParser;
 import me.kqn.storeunits.Utils.ItemBuilder;
 import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.Bukkit;
@@ -68,12 +70,14 @@ public class SettingGUI {
             Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(unitID,page,pageID);},1);
         }),5,1);
         //下界之星
-        double money= UnitsConfig.getMoney(unitID);
-        String perm=UnitsConfig.getPermission();
-        InterfaceConfig.Icon icon=InterfaceConfig.getSetting_upgrade(money,perm);
+        //升级逻辑在这里写的
+        double money= ExpParser.parseMathExpression(UpgradeConfig.getMoney_upgrade(unitID,page.level));
+        InterfaceConfig.Icon icon=InterfaceConfig.getSetting_upgrade(money);
         pane.addItem(new GuiItem(new ItemBuilder(icon.material).setName(icon.name).setLore(icon.lore).setCustomModelData(icon.custommodeldata).build(),x->{
             x.setCancelled(true);
-
+            if(x.getClick()==ClickType.LEFT||x.getClick()==ClickType.RIGHT){
+                page.unlock(UpgradeConfig.getUpgrade_unlock(),unitID);
+            }
         }),6,1);
         gui.addPane(pane);
         gui.show(player);

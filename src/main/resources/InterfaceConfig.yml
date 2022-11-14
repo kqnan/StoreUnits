@@ -10,8 +10,8 @@ Default-MainUI-Unlock-Icon:
   icon1:
     name: '默认没有权限时未解锁单元图标'
     lore:
-      - ""
-      - ""
+      - "解锁需要金币%money%"
+      - "解锁需要权限%permission%"
     custommodeldata: 1234
     material: barrier
   #当有StoreUnits.perm1权限时的图标  有permission字段
@@ -19,8 +19,8 @@ Default-MainUI-Unlock-Icon:
     permission: "StoreUnits.perm1"
     name: '当有StoreUnits.perm1权限时未解锁单元图标'
     lore:
-      - ""
-      - ""
+      - "解锁需要金币%money%"
+      - "解锁需要权限%permission%"
     custommodeldata: 1234
     material: barrier
 Default-MainUI-NextPage:
@@ -45,7 +45,7 @@ Default-Unlock-Slot:
 Default-Setting-Upgrade:
   name: '升级需要花费%money%'
   lore:
-    - '还需要权限%permission%'
+    - '你有足够的金币吗？'
   custommodeldata: 1234
   material: NETHER_STAR
 Default-Title: "存储空间的标题"

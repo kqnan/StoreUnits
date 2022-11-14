@@ -1,8 +1,10 @@
-permission: "StoreUnits.unlock" #解锁单元需要的权限
+#解锁新的存储单元需要的权限
+permission: "StoreUnits.unlock"
+#解锁新的存储单元需要的金币，（注意和升级存储单元的区别）
 money: "%unitID%*10"
 msg_unlock:
   - '你解锁了新的存储单元'
-  - '单元需要为%unitID%'
+  - '单元需要%unitID%'
 msg_noperm:
   - '你没权限解锁%unitID%号格子'
   - '你需要StoreUnits.%unitID%权限'

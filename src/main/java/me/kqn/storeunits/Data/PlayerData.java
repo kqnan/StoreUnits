@@ -53,7 +53,7 @@ public class PlayerData   {
     public boolean isPrepared=false;
     public static void addPage(UUID pID){
         PlayerData playerData=pDatas.get(pID);
-        if(playerData.storePages.length>= Config.getMaxPages())return;
+       // if(playerData.storePages.length>= Config.getMaxPages())return;
         StorePage[] tmp=new StorePage[playerData.storePages.length+1];
         for (int i = 0; i < playerData.storePages.length; i++) {
             tmp[i]=playerData.storePages[i];

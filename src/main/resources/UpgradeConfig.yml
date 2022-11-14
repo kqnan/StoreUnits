@@ -7,4 +7,9 @@ money_upgrade: "%unitID%*%unitLevel%*10"
 msg_nomoney:
   - '你没有足够金币'
 
+#每个单元默认的大小，也就是0级时候有多少个槽位
+default-unlock: 7
+#每升一级解锁的槽位的个数
+upgrade-unlock: 3
+
 

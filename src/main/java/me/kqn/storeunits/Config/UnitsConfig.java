@@ -2,10 +2,13 @@ package me.kqn.storeunits.Config;
 
 import me.kqn.storeunits.StoreUnits;
 import me.kqn.storeunits.Utils.ExpParser;
+import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class UnitsConfig {
@@ -16,6 +19,7 @@ public class UnitsConfig {
     }
 
     public static double getMoney(int unitsID) {
+
          return ExpParser.parseMathExpression(money.replace("%unitID%",String.valueOf(unitsID)));
 
     }
@@ -29,7 +33,9 @@ public class UnitsConfig {
         }
         return msg;
     }
-
+    public static List<String> getMsg_MaxPage(){
+        return Collections.singletonList("已达到解锁上限");
+    }
     public static List<String> getMsg_unlock(int unitID) {
         ArrayList<String> msg=new ArrayList<>();
         for (String s : msg_unlock) {

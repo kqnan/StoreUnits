@@ -3,7 +3,9 @@ package me.kqn.storeunits.Gui;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
+import me.kqn.storeunits.Config.Config;
 import me.kqn.storeunits.Config.InterfaceConfig;
+import me.kqn.storeunits.Config.MessageConfig;
 import me.kqn.storeunits.Config.UnitsConfig;
 import me.kqn.storeunits.Data.PlayerData;
 import me.kqn.storeunits.StoreUnits;
@@ -114,7 +116,8 @@ public class UnitsGUI {
             for(;x_lock<9;x_lock++){
                 int finalY_lock = y_lock;
                 int finalX_lock = x_lock;
-                page.addItem(new GuiItem(UnlockIcon(pageID), x->{x.setCancelled(true);
+                int unitID_unlock=y_lock*9+x_lock+pageID*45;
+                page.addItem(new GuiItem(UnlockIcon(pageID,(OfflinePlayer) player,unitID_unlock), x->{x.setCancelled(true);
                     //如果不是左键或者右键点的，那么返回，防止卡bug
                     if(!(x.getClick()== ClickType.LEFT||x.getClick()==ClickType.RIGHT))return;
                     int slot=finalY_lock*9+finalX_lock;
@@ -122,13 +125,18 @@ public class UnitsGUI {
                     if(unitID==pData.storePages.length){//如果点击的槽位时第一个未解锁的，那么解锁，需要注意inv的序号到数组的序号的映射
                         boolean r1= StoreUnits.plugin.permission.hasPerm(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getPermission());
                         boolean r2=StoreUnits.plugin.economy.has(((OfflinePlayer) player), UnitsConfig.getMoney(unitID));
+                        boolean r3=pData.storePages.length+1<= Config.getMaxPages();
                         if(!r1){
                             Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_noperm(unitID));
-                            return;
+                            return;//没权限
                         }
                         if(!r2){
                             Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_nomoney(unitID));
-                            return;
+                            return;//没钱
+                        }
+                        if(!r3){
+                            Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_MaxPage());
+                            return;//达到解锁上限
                         }
                         PlayerData.addPage(((OfflinePlayer)player).getUniqueId());
                         gui.getInventory().setItem(slot,null);
@@ -159,8 +167,8 @@ public class UnitsGUI {
                 .setName(icon.name).build();
 
     }
-    private ItemStack UnlockIcon(int pageID){
-        InterfaceConfig.Icon icon= InterfaceConfig.getUnlock_slot();
+    private ItemStack UnlockIcon(int pageID,OfflinePlayer player,int unitID){
+        InterfaceConfig.Icon icon= InterfaceConfig.getMainui_unlock_icon(player,UnitsConfig.getMoney(unitID),UnitsConfig.getPermission());
         return new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
 
