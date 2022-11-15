@@ -148,7 +148,7 @@ public class UnitsGUI {
                         PlayerData.addPage(((OfflinePlayer)player).getUniqueId());
                         StoreUnits.plugin.economy.take(((OfflinePlayer) player),UnitsConfig.getMoney(unitID));
                         gui.getInventory().setItem(slot,null);
-                        player.closeInventory();
+                      //  player.closeInventory();
                         Msg.msg(((OfflinePlayer)player).getUniqueId(),UnitsConfig.getMsg_unlock(unitID));
                         Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{show(pageID);},1);
                     }
