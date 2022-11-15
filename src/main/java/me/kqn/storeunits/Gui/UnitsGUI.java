@@ -79,9 +79,18 @@ public class UnitsGUI {
             ItemStack uIcon=pData.storePages[j].getUnitIcon(j);
             int finalJ = j;
             page.addItem(new GuiItem(uIcon, x->{x.setCancelled(true);
-                player.closeInventory();
-                SettingGUI settingGUI=new SettingGUI(player);
-                settingGUI.show(finalJ,pData.storePages[finalJ],pageID);}),inv_index%9,inv_index/9);
+                if(x.getClick()==ClickType.RIGHT){//右键设置
+                    player.closeInventory();
+                    SettingGUI settingGUI=new SettingGUI(player);
+                    settingGUI.show(finalJ,pData.storePages[finalJ],pageID);
+                }
+                if(x.getClick()==ClickType.LEFT){
+                    player.closeInventory();//左键打开
+                    Gui gui1=new Gui(player);
+                    gui1.showPage(finalJ);//finalJ?
+                }
+
+            }),inv_index%9,inv_index/9);
         }
         unlock_start++;
         //创建未解锁槽位的图标
