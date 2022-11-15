@@ -91,7 +91,7 @@ public class SettingGUI {
             if(x.getClick()==ClickType.LEFT||x.getClick()==ClickType.RIGHT){
 
                 page.unlock(UpgradeConfig.getUpgrade_unlock(),unitID);
-                player.closeInventory();
+                //player.closeInventory();
                 SettingGUI settingGUI=new SettingGUI(player);
                 settingGUI.show(unitID, page, pageID);
 
