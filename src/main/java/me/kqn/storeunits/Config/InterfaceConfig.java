@@ -46,6 +46,11 @@ public class InterfaceConfig {
     private static Icon setting_upgrade;
     private static Icon nextpage_unit;
     private static Icon prepage_unit;
+    private static  Icon units_back;
+
+    public static Icon getUnits_back() {
+        return units_back;
+    }
 
     public static Icon getNextpage_unit() {
         return nextpage_unit;
@@ -105,6 +110,7 @@ public class InterfaceConfig {
         setting_back=readIcon(file.getConfigurationSection("Default-Setting-Back"));
         setting_icon=readIcon(file.getConfigurationSection("Default-Setting-Icon"));
         setting_tag=readIcon(file.getConfigurationSection("Default-Setting-TagIcon"));
+        units_back=readIcon(file.getConfigurationSection("Default-Unit-Back"));
     }
 
     private static Icon readIcon(ConfigurationSection section){

@@ -97,7 +97,7 @@ public class Gui {
             }x.setCancelled(true);}),8,0);
 
             //返回总界面按钮
-            spane.addItem(new GuiItem(slideIcon(unitID),x->{x.setCancelled(true);
+            spane.addItem(new GuiItem(new ItemBuilder(InterfaceConfig.getUnits_back()).build(),x->{x.setCancelled(true);
                 player.closeInventory();
                 Bukkit.getScheduler().runTaskLater(StoreUnits.plugin,()->{
                     UnitsGUI gui1=new UnitsGUI(player);
