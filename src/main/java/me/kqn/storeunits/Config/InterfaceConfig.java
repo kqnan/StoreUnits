@@ -132,6 +132,7 @@ public class InterfaceConfig {
                 break;
             }
         }
+        if(perm_need==null)perm_need="无";
         icon.name=icon.name.replace("%money%",String.valueOf(money_need)).replace("%permission%",perm_need);
         ArrayList<String> lore=new ArrayList<>();
         for (String s : icon.lore) {

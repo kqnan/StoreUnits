@@ -1,5 +1,7 @@
-#解锁新的存储单元需要的权限
-permission: "StoreUnits.unlock"
+#解锁新的存储单元需要的权限,请严格遵守格式 , "-"符号用于表示数字范围 ":"符号表示范围与权限的分割符
+permission:
+  - "9-18:StoreUnits.unlock"  #意味着9-18号需要StoreUnits.unlock权限 其他单元解锁不需要权限
+  - "30-40:StoreUnits.VIP" #30-40号需要vip权限
 #解锁新的存储单元需要的金币，（注意和升级存储单元的区别）
 money: "%unitID%*10"
 msg_unlock:

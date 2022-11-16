@@ -6,16 +6,20 @@ import me.kqn.storeunits.Utils.Msg;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class UnitsConfig {
-    private static String permission;
+    private static List<String> permission;
+    private static HashMap<Pair,String> permissions;
     private static List<String> msg_dialog;
-    public static String getPermission() {
-        return permission;
+
+    public static String getPermission(int unitID) {
+        for (Pair pair : permissions.keySet()) {
+            if(pair.p1<=unitID&&unitID<=pair.p2){
+                return permissions.get(pair);
+            }
+        }
+        return null;
     }
 
     public static double getMoney(int unitsID) {
@@ -63,12 +67,36 @@ public class UnitsConfig {
     public static void read(){
         StoreUnits.plugin.saveResource("UnitConfig.yml",false);
         file= YamlConfiguration.loadConfiguration(new File("plugins\\StoreUnits\\UnitConfig.yml"));
-        permission=file.getString("permission");
+        permission=file.getStringList("permission");
+        parsePermission();
         money=file.getString("money");
         msg_noperm=file.getStringList("msg_noperm");
         msg_nomoney=file.getStringList("msg_nomoney");
         msg_unlock=file.getStringList("msg_unlock");
         msg_dialog=file.getStringList("dialog");
     }
+    private static void parsePermission(){
+        permissions=new HashMap<>();
+        for (String s : permission) {
+            String perm=s.split(":")[1];
+            String range=s.split(":")[0];
+            int lo=Integer.parseInt(range.split("-")[0]);
+            int hi=Integer.parseInt(range.split("-")[1]);
+            Pair pair=new Pair(lo,hi);
+            permissions.put(pair,perm);
 
+        }
+    }
+    private static class  Pair{
+        public int p1;
+        public int p2;
+        public Pair(int pa1,int pa2){
+            p1=pa1;p2=pa2;
+        }
+
+        @Override
+        public int hashCode() {
+            return p1*7+p2*31;
+        }
+    }
 }

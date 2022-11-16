@@ -10,6 +10,7 @@ public class DefaultPerm implements Permission{
 
     @Override
     public boolean hasPerm(UUID playerID, String perm) {
+        if(perm==null)return true;
         OfflinePlayer offlinePlayer=Bukkit.getOfflinePlayer(playerID);
         if(offlinePlayer.isOnline()){
             return ((Player)offlinePlayer).hasPermission(perm);

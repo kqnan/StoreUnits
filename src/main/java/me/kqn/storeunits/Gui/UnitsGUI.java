@@ -130,7 +130,7 @@ public class UnitsGUI {
                     int slot=finalY_lock*9+finalX_lock;
                     int unitID=slot+45*pageID;
                     if(unitID==pData.storePages.length){//如果点击的槽位时第一个未解锁的，那么解锁，需要注意inv的序号到数组的序号的映射
-                        boolean r1= StoreUnits.plugin.permission.hasPerm(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getPermission());
+                        boolean r1= StoreUnits.plugin.permission.hasPerm(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getPermission(unitID));
                         boolean r2=StoreUnits.plugin.economy.has(((OfflinePlayer) player), UnitsConfig.getMoney(unitID));
                         boolean r3=pData.storePages.length+1<= Config.getMaxPages();
                         if(!r1){
@@ -176,7 +176,7 @@ public class UnitsGUI {
 
     }
     private ItemStack UnlockIcon(int pageID,OfflinePlayer player,int unitID){
-        InterfaceConfig.Icon icon= InterfaceConfig.getMainui_unlock_icon(player,UnitsConfig.getMoney(unitID),UnitsConfig.getPermission());
+        InterfaceConfig.Icon icon= InterfaceConfig.getMainui_unlock_icon(player,UnitsConfig.getMoney(unitID),UnitsConfig.getPermission(unitID));
         return new ItemBuilder(icon.material).setLore(icon.lore).setCustomModelData(icon.custommodeldata)
                 .setName(icon.name).build();
 
