@@ -43,12 +43,14 @@ public class SettingGUI {
                     else if(inv.getContents()[i]!=null&&inv.getContents()[i].getType()!=Material.AIR){
                         player.getInventory().addItem(inv.getItem(i));
                         inv.setItem(i,new ItemStack(Material.AIR));
+
                     }
                 }
             },1);
         });
         //返回按钮 右上角
-        pane.addItem(new GuiItem(new ItemBuilder(Material.BARRIER).setName("&f返回").build(),x->{
+
+        pane.addItem(new GuiItem(new ItemBuilder(InterfaceConfig.getSetting_back()).build(),x->{
             x.setCancelled(true);
             UnitsGUI unitsGUI=new UnitsGUI(player);
             player.closeInventory();
@@ -66,14 +68,14 @@ public class SettingGUI {
         });
         pane.addItem(guiItem,2,1);
         //命名牌
-        pane.addItem(new GuiItem(new ItemBuilder(Material.NAME_TAG).setName(InterfaceConfig.getFullName(page.name,unitID,page.level)).setLore(Collections.singletonList("&8点击更改")).build(), x->{
+        pane.addItem(new GuiItem(new ItemBuilder(InterfaceConfig.getSetting_tag()).build(), x->{
             x.setCancelled(true);
             player.closeInventory();
             Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_dialog());
             ChatListener.startDialog(((OfflinePlayer)player).getUniqueId(),unitID,page,pageID);
         }),4,1);
         //指南针，设置显示图标
-        pane.addItem(new GuiItem(new ItemBuilder(Material.COMPASS).setName("&f设置存储单元图标").build(),x->{
+        pane.addItem(new GuiItem(new ItemBuilder(InterfaceConfig.getSetting_icon()).build(),x->{
             x.setCancelled(true);
             if(!(x.getClick()== ClickType.LEFT||x.getClick()==ClickType.RIGHT))return;//不是左键或右键就返回
             ItemStack itemStack=x.getCursor();

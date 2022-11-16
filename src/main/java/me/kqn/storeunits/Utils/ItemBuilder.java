@@ -2,6 +2,7 @@ package me.kqn.storeunits.Utils;
 
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.kqn.storeunits.Config.InterfaceConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -43,6 +44,17 @@ public class ItemBuilder {
     public ItemBuilder setNBT(NBTCompound NBT){
         this.NBT=NBT;
         return this;
+    }
+    public ItemBuilder (InterfaceConfig.Icon icon){
+        this.name=ChatColor.translateAlternateColorCodes('&',icon.name);
+        this.amount=1;
+        this.lore=new ArrayList<>();
+        for (String s : icon.lore) {
+            lore.add(ChatColor.translateAlternateColorCodes('&',s));
+        }
+        this.material=icon.material;
+        this.cmd=icon.custommodeldata;
+
     }
     public ItemStack build(){
         ItemStack itemStack=new ItemStack(material);

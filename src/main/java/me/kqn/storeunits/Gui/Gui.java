@@ -30,7 +30,8 @@ public class Gui {
     public void showPage(int unitID){
         if(!pData.isPrepared)return;
         if(pData.storePages.length<=unitID||unitID<0)return;
-        ChestGui gui=new ChestGui(6,InterfaceConfig.getFullName(pData.storePages[unitID].name,unitID,pData.storePages[unitID].level));
+       // ChestGui gui=new ChestGui(6,InterfaceConfig.getFullName(pData.storePages[unitID].name,unitID,pData.storePages[unitID].level));
+        ChestGui gui=new ChestGui(6,InterfaceConfig.getTitle());//存储空间的标题
         int backbutton=4;
 
         //阻止下方滑条栏放置物品

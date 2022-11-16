@@ -24,7 +24,22 @@ public class InterfaceConfig {
     private static String title;
     private static String setting_title;
     private static String name_format;
+    private static Icon setting_tag;
 
+    public static Icon getSetting_tag() {
+        return setting_tag;
+    }
+
+    public static Icon getSetting_icon() {
+        return setting_icon;
+    }
+
+    public static Icon getSetting_back() {
+        return setting_back;
+    }
+
+    private static Icon setting_icon;
+    private static Icon setting_back;
 
 
     private static String default_name;
@@ -87,7 +102,9 @@ public class InterfaceConfig {
         setting_upgrade=readIcon(file.getConfigurationSection("Default-Setting-Upgrade"))    ;
         nextpage_unit=readIcon(file.getConfigurationSection("Default-Unit-NextPage"));
         prepage_unit=readIcon(file.getConfigurationSection("Default-Unit-PrePage"));
-
+        setting_back=readIcon(file.getConfigurationSection("Default-Setting-Back"));
+        setting_icon=readIcon(file.getConfigurationSection("Default-Setting-Icon"));
+        setting_tag=readIcon(file.getConfigurationSection("Default-Setting-TagIcon"));
     }
 
     private static Icon readIcon(ConfigurationSection section){
