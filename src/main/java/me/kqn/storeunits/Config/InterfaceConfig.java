@@ -47,7 +47,7 @@ public class InterfaceConfig {
     private static Icon nextpage_unit;
     private static Icon prepage_unit;
     private static  Icon units_back;
-
+    private static List<String> defualt_lore;
     public static Icon getUnits_back() {
         return units_back;
     }
@@ -81,6 +81,9 @@ public class InterfaceConfig {
 
     private static Icon unlock_slot;
 
+    public static List<String> getDefualt_lore() {
+        return defualt_lore;
+    }
 
     private static YamlConfiguration file;
     public static void read(){
@@ -111,6 +114,7 @@ public class InterfaceConfig {
         setting_icon=readIcon(file.getConfigurationSection("Default-Setting-Icon"));
         setting_tag=readIcon(file.getConfigurationSection("Default-Setting-TagIcon"));
         units_back=readIcon(file.getConfigurationSection("Default-Unit-Back"));
+        defualt_lore=file.getStringList("Default-Lore");
     }
 
     private static Icon readIcon(ConfigurationSection section){

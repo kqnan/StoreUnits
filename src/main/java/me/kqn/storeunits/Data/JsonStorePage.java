@@ -20,9 +20,10 @@ public abstract class JsonStorePage {
     public ItemStack getUnitIcon(int unitID) {
         ItemMeta meta=unitIcon.getItemMeta();
         ItemStack r=unitIcon.clone();
-        if(meta!=null) {
-            meta.setDisplayName(InterfaceConfig.getFullName(name, unitID, level));
 
+        if(meta!=null) {
+            meta.setLore(InterfaceConfig.getDefualt_lore());
+            meta.setDisplayName(InterfaceConfig.getFullName(name, unitID, level));
             r.setItemMeta(meta);
         }
 

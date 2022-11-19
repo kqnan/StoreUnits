@@ -91,4 +91,7 @@ Default-Title: "存储空间的标题"
 Default-Name-Format: "&f%unitID%号%unitLevel%级%unitName%"
 #%unitName%的默认值
 Default-Name: "普通箱子"
+Default-Lore:
+  - '这是一个存储单元'
+  - '左键进入空间-右键设置'
 Default-Setting-Title: '设置面板菜单的标题'
