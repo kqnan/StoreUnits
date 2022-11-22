@@ -3,6 +3,7 @@ package me.kqn.storeunits;
 import me.kqn.storeunits.Command.MainCommand;
 import me.kqn.storeunits.Config.*;
 import me.kqn.storeunits.Data.DataSource.DataSource;
+import me.kqn.storeunits.Data.DataSource.Database;
 import me.kqn.storeunits.Data.DataSource.JsonFile;
 import me.kqn.storeunits.Data.DataSource.Mysql;
 import me.kqn.storeunits.Listeners.LoginListeners;
@@ -50,7 +51,7 @@ public static StoreUnits plugin;
             dataSource=new JsonFile();
         }
         else if(Config.getDatasource().equalsIgnoreCase("mysql")){
-            dataSource=new Mysql();
+            dataSource=new Database();
         }
         //在插件开始时异步加载一次玩家数据。
       //  loadPlayerData_Async();
@@ -80,7 +81,7 @@ public static StoreUnits plugin;
             dataSource=new JsonFile();
         }
         else if(Config.getDatasource().equalsIgnoreCase("mysql")){
-            dataSource=new Mysql();
+            dataSource=new Database();
         }
        if(autosaveTask!=null) {
            autosaveTask.cancel();
