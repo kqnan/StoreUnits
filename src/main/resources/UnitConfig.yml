@@ -7,9 +7,10 @@ money: "%unitID%*10"
 msg_unlock:
   - '你解锁了新的存储单元'
   - '单元需要%unitID%'
+  - '你需要%money%金币'
 msg_noperm:
   - '你没权限解锁%unitID%号格子'
-  - '你需要StoreUnits.%unitID%权限'
+  - '你需要%permission%权限'
 #金币不足时消息
 msg_nomoney:
   - '你没有足够金币'

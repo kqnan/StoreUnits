@@ -134,11 +134,13 @@ public class UnitsGUI {
                         boolean r2=StoreUnits.plugin.economy.has(((OfflinePlayer) player), UnitsConfig.getMoney(unitID));
                         boolean r3=pData.storePages.length+1<= Config.getMaxPages();
                         if(!r1){
-                            Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_noperm(unitID));
+                            String permission=UnitsConfig.getPermission(unitID);
+                            Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_noperm(unitID,permission));
                             return;//没权限
                         }
                         if(!r2){
-                            Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_nomoney(unitID));
+                            double money=UnitsConfig.getMoney(unitID);
+                            Msg.msg(((OfflinePlayer)player).getUniqueId(), UnitsConfig.getMsg_nomoney(unitID,money));
                             return;//没钱
                         }
                         if(!r3){

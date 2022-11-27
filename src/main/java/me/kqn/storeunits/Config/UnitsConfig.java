@@ -30,10 +30,10 @@ public class UnitsConfig {
     private static List<String> msg_noperm;
     private static List<String> msg_nomoney;
 
-    public static List<String> getMsg_noperm(int unitID) {
+    public static List<String> getMsg_noperm(int unitID,String permission) {
         ArrayList<String> msg=new ArrayList<>();
         for (String s : msg_noperm) {
-            msg.add(s.replace("%unitID%",String.valueOf(unitID)));
+            msg.add(s.replace("%unitID%",String.valueOf(unitID)).replace("%permission%",permission));
         }
         return msg;
     }
@@ -54,10 +54,10 @@ public class UnitsConfig {
     }
 
     private static List<String> msg_unlock;
-    public static List<String> getMsg_nomoney(int unitID) {
+    public static List<String> getMsg_nomoney(int unitID,double money) {
         ArrayList<String> msg=new ArrayList<>();
         for (String s : msg_nomoney) {
-            msg.add(s.replace("%unitID%",String.valueOf(unitID)));
+            msg.add(s.replace("%unitID%",String.valueOf(unitID)).replace("%money%",String.valueOf(money)));
         }
         return msg;
     }
